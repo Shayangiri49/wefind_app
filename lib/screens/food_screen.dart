@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../widgets/product_card.dart';
 import '../screens/product_detail_screen.dart';
 import '../utils/app_colors.dart';
+import '../services/cart_service.dart';
 
 class FoodScreen extends StatefulWidget {
   const FoodScreen({Key? key}) : super(key: key);
@@ -16,7 +18,7 @@ class _FoodScreenState extends State<FoodScreen> {
     {
       'name': 'Royal Canin Adult',
       'price': 45.99,
-      'image': 'https://images.unsplash.com/photo-1589923188900-85dae523342b?w=400&h=400&fit=crop&crop=center',
+      'image': 'https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400&h=400&fit=crop&crop=center',
       'description': 'Premium dry food for adult dogs with balanced nutrition and essential vitamins.',
       'isFavorite': false,
       'rating': 4.7,
@@ -26,7 +28,7 @@ class _FoodScreenState extends State<FoodScreen> {
     {
       'name': 'Pedigree Puppy',
       'price': 32.50,
-      'image': 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=400&h=400&fit=crop&crop=center',
+      'image': 'https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400&h=400&fit=crop&crop=center',
       'description': 'Specially formulated for growing puppies with high protein content.',
       'isFavorite': false,
       'rating': 4.3,
@@ -36,7 +38,7 @@ class _FoodScreenState extends State<FoodScreen> {
     {
       'name': 'Purina Pro Plan',
       'price': 58.75,
-      'image': 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&h=400&fit=crop&crop=center',
+      'image': 'https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400&h=400&fit=crop&crop=center',
       'description': 'Advanced nutrition with real chicken as the first ingredient.',
       'isFavorite': false,
       'rating': 4.8,
@@ -46,7 +48,7 @@ class _FoodScreenState extends State<FoodScreen> {
     {
       'name': 'Hill\'s Science Diet',
       'price': 42.99,
-      'image': 'https://images.unsplash.com/photo-1552053831-71594a27632d?w=400&h=400&fit=crop&crop=center',
+      'image': 'https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400&h=400&fit=crop&crop=center',
       'description': 'Veterinarian recommended nutrition for optimal health and vitality.',
       'isFavorite': false,
       'rating': 4.6,
@@ -56,7 +58,7 @@ class _FoodScreenState extends State<FoodScreen> {
     {
       'name': 'Blue Buffalo Life',
       'price': 65.25,
-      'image': 'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=400&h=400&fit=crop&crop=center',
+      'image': 'https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400&h=400&fit=crop&crop=center',
       'description': 'Natural ingredients with real meat and wholesome grains.',
       'isFavorite': false,
       'rating': 4.9,
@@ -66,7 +68,7 @@ class _FoodScreenState extends State<FoodScreen> {
     {
       'name': 'Iams Proactive',
       'price': 38.99,
-      'image': 'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=400&h=400&fit=crop&crop=center',
+      'image': 'https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400&h=400&fit=crop&crop=center',
       'description': 'Complete nutrition with essential nutrients for daily health.',
       'isFavorite': false,
       'rating': 4.4,
@@ -76,7 +78,7 @@ class _FoodScreenState extends State<FoodScreen> {
     {
       'name': 'Nutro Ultra',
       'price': 52.50,
-      'image': 'https://images.unsplash.com/photo-1589923188900-85dae523342b?w=400&h=400&fit=crop&crop=center',
+      'image': 'https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400&h=400&fit=crop&crop=center',
       'description': 'Premium blend with three proteins from chicken, lamb, and salmon.',
       'isFavorite': false,
       'rating': 4.7,
@@ -86,7 +88,7 @@ class _FoodScreenState extends State<FoodScreen> {
     {
       'name': 'Wellness Complete',
       'price': 48.75,
-      'image': 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=400&h=400&fit=crop&crop=center',
+      'image': 'https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400&h=400&fit=crop&crop=center',
       'description': 'Natural dry food with real meat and wholesome ingredients.',
       'isFavorite': false,
       'rating': 4.5,
@@ -96,7 +98,7 @@ class _FoodScreenState extends State<FoodScreen> {
     {
       'name': 'Merrick Grain Free',
       'price': 71.99,
-      'image': 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&h=400&fit=crop&crop=center',
+      'image': 'https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400&h=400&fit=crop&crop=center',
       'description': 'Grain-free formula with real deboned beef as the first ingredient.',
       'isFavorite': false,
       'rating': 4.8,
@@ -106,7 +108,7 @@ class _FoodScreenState extends State<FoodScreen> {
     {
       'name': 'Taste of the Wild',
       'price': 55.25,
-      'image': 'https://images.unsplash.com/photo-1552053831-71594a27632d?w=400&h=400&fit=crop&crop=center',
+      'image': 'https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400&h=400&fit=crop&crop=center',
       'description': 'High-protein, grain-free formula inspired by your dog\'s ancestral diet.',
       'isFavorite': false,
       'rating': 4.6,
@@ -116,7 +118,7 @@ class _FoodScreenState extends State<FoodScreen> {
     {
       'name': 'Fromm Family',
       'price': 62.50,
-      'image': 'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=400&h=400&fit=crop&crop=center',
+      'image': 'https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400&h=400&fit=crop&crop=center',
       'description': 'Premium nutrition with balanced proteins and essential fatty acids.',
       'isFavorite': false,
       'rating': 4.7,
@@ -126,7 +128,7 @@ class _FoodScreenState extends State<FoodScreen> {
     {
       'name': 'Acana Heritage',
       'price': 68.99,
-      'image': 'https://images.unsplash.com/photo-1589923188900-85dae523342b?w=400&h=400&fit=crop&crop=center',
+      'image': 'https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=400&h=400&fit=crop&crop=center',
       'description': 'Biologically appropriate food with fresh regional ingredients.',
       'isFavorite': false,
       'rating': 4.9,
@@ -254,6 +256,17 @@ class _FoodScreenState extends State<FoodScreen> {
                           setState(() {
                             product['isFavorite'] = !(product['isFavorite'] ?? false);
                           });
+                        },
+                        onAddToCart: () {
+                          final cartService = Provider.of<CartService>(context, listen: false);
+                          cartService.addFoodItem(product);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('${product['name']} added to cart!'),
+                              backgroundColor: AppColors.primaryOrange,
+                              duration: const Duration(seconds: 2),
+                            ),
+                          );
                         },
                       );
                     },

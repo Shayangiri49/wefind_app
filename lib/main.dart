@@ -11,7 +11,9 @@ import 'screens/grooming_screen.dart';
 import 'screens/onboarding_screen.dart';
 import 'screens/main_navigation.dart';
 import 'screens/sell_pet_screen.dart';
+import 'screens/cart_screen.dart'; // Import CartScreen
 import 'services/favorites_service.dart';
+import 'services/cart_service.dart'; // Import CartService
 
 void main() {
   runApp(const MyApp());
@@ -22,8 +24,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => FavoritesService(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => FavoritesService()),
+        ChangeNotifierProvider(create: (context) => CartService()), // Provide CartService
+      ],
       child: MaterialApp(
         title: 'WeFind App',
         debugShowCheckedModeBanner: false,
@@ -55,6 +60,7 @@ class MyApp extends StatelessWidget {
           '/food': (context) => const FoodScreen(),
           '/grooming': (context) => const GroomingScreen(),
           '/sell_pet': (context) => const SellPetScreen(),
+          '/cart': (context) => const CartScreen(), // Add CartScreen route
         },
       ),
     );

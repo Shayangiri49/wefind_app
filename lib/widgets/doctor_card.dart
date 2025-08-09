@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wefind_app/utils/responsive_helper.dart';
+import '../utils/responsive_helper.dart';
 import '../utils/app_colors.dart';
 
 class DoctorCard extends StatelessWidget {
@@ -123,4 +123,3 @@ class DoctorCard extends StatelessWidget {
     );
   }
 }
-

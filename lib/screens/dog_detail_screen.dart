@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../models/dog_model.dart';
+import '../services/cart_service.dart';
 import '../utils/app_colors.dart';
 
 class DogDetailScreen extends StatefulWidget {
@@ -24,6 +26,8 @@ class _DogDetailScreenState extends State<DogDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final cartService = Provider.of<CartService>(context, listen: false);
+
     return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(
@@ -52,19 +56,28 @@ class _DogDetailScreenState extends State<DogDetailScreen> {
                       children: [
                         IconButton(
                           icon: const Icon(Icons.shopping_cart_outlined),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/cart');
+                          },
                         ),
-                        Positioned(
-                          right: 8,
-                          top: 8,
-                          child: Container(
-                            width: 8,
-                            height: 8,
-                            decoration: const BoxDecoration(
-                              color: Colors.red,
-                              shape: BoxShape.circle,
-                            ),
-                          ),
+                        Consumer<CartService>(
+                          builder: (context, cart, child) {
+                            if (cart.totalItems > 0) {
+                              return Positioned(
+                                right: 8,
+                                top: 8,
+                                child: Container(
+                                  width: 8,
+                                  height: 8,
+                                  decoration: const BoxDecoration(
+                                    color: Colors.red,
+                                    shape: BoxShape.circle,
+                                  ),
+                                ),
+                              );
+                            }
+                            return const SizedBox.shrink();
+                          },
                         ),
                       ],
                     ),
@@ -126,13 +139,16 @@ class _DogDetailScreenState extends State<DogDetailScreen> {
                   ],
                 ),
                 const SizedBox(height: 12),
-                // Size options - now clickable
-                Row(
+                // Size options - now clickable with proper wrapping
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text('Size: ', style: TextStyle(fontWeight: FontWeight.w500)),
-                    ...widget.dog.availableSizes.map((size) => Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 4),
-                      child: GestureDetector(
+                    const SizedBox(height: 8),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: widget.dog.availableSizes.map((size) => GestureDetector(
                         onTap: () {
                           setState(() {
                             selectedSize = size;
@@ -156,8 +172,8 @@ class _DogDetailScreenState extends State<DogDetailScreen> {
                             ),
                           ),
                         ),
-                      ),
-                    )),
+                      )).toList(),
+                    ),
                   ],
                 ),
                 const SizedBox(height: 16),
@@ -224,7 +240,15 @@ class _DogDetailScreenState extends State<DogDetailScreen> {
                           borderRadius: BorderRadius.circular(16),
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        cartService.addItem(widget.dog);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('${widget.dog.name} added to cart!'),
+                            duration: const Duration(seconds: 1),
+                          ),
+                        );
+                      },
                       child: const Text(
                         'Add to Cart',
                         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),

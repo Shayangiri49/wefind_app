@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wefind_app/utils/app_colors.dart';
-import 'package:wefind_app/utils/responsive_helper.dart';
+import '../utils/app_colors.dart';
+import '../utils/responsive_helper.dart';
 
 class SellPetScreen extends StatefulWidget {
   const SellPetScreen({Key? key}) : super(key: key);

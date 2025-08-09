@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wefind_app/utils/responsive_helper.dart';
+import '../utils/responsive_helper.dart';
 import '../utils/app_colors.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -291,11 +291,6 @@ class _SignInScreenState extends State<SignInScreen> {
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(ResponsiveHelper.responsiveBorderRadius(context, mobile: 8)),
             borderSide: const BorderSide(color: AppColors.primaryOrange, width: 1.5),
-          ),
-          suffixIcon: Icon(
-            Icons.keyboard_arrow_down,
-            color: AppColors.subtleGray,
-            size: ResponsiveHelper.responsiveIconSize(context, mobile: 18),
           ),
         ),
       ),

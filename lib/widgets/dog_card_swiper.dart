@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:provider/provider.dart';
-import 'package:wefind_app/utils/responsive_helper.dart';
+import '../utils/responsive_helper.dart';
 import '../models/dog_model.dart';
 import '../services/favorites_service.dart';
-import 'action_buttons.dart';
+import '../widgets/action_buttons.dart';
 import '../screens/dog_detail_screen.dart';
 
 class DogCardSwiper extends StatefulWidget {

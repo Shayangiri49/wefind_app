@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wefind_app/utils/responsive_helper.dart';
+import '../utils/responsive_helper.dart';
 import '../utils/app_colors.dart';
 import '../widgets/doctor_card.dart';
 import 'doctor_detail_screen.dart';

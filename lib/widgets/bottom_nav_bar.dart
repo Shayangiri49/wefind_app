@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wefind_app/utils/responsive_helper.dart';
+import '../utils/responsive_helper.dart';
 import '../services/favorites_service.dart';
+// Import CartService
 import '../utils/app_colors.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -126,13 +127,15 @@ class _BottomNavBarState extends State<BottomNavBar> {
                     },
                   ),
                 ),
+                
                 // Profile
                 Expanded(
                   child: _NavIcon(
                     icon: Icons.person_outline,
-                    isActive: widget.currentIndex == 3,
+                    isActive: widget.currentIndex == 3, // Changed index to 3
                     onTap: () {
-                      widget.onTabChanged(3);
+                      widget.onTabChanged(3); // Changed index to 3
+                      if (widget.onProfileTap != null) widget.onProfileTap!();
                     },
                   ),
                 ),

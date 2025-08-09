@@ -23,6 +23,36 @@ class Dog {
     this.description = 'A lovely dog looking for a new home. Friendly, playful, and loyal.',
   });
 
+  factory Dog.fromJson(Map<String, dynamic> json) {
+    return Dog(
+      id: json['id'],
+      name: json['name'],
+      breed: json['breed'],
+      imageUrl: json['imageUrl'],
+      age: json['age'],
+      tags: List<String>.from(json['tags']),
+      price: json['price'],
+      rating: json['rating'],
+      availableSizes: List<String>.from(json['availableSizes']),
+      description: json['description'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'breed': breed,
+      'imageUrl': imageUrl,
+      'age': age,
+      'tags': tags,
+      'price': price,
+      'rating': rating,
+      'availableSizes': availableSizes,
+      'description': description,
+    };
+  }
+
   static List<Dog> getSampleDogs() {
     return [
       Dog(

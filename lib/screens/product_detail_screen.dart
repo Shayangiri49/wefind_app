@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../utils/app_colors.dart';
+import '../services/cart_service.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   final Map<String, dynamic> product;
@@ -109,6 +111,19 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               height: 200,
                               width: double.infinity,
                               fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Container(
+                                  height: 200,
+                                  color: Colors.grey[300],
+                                  child: const Center(
+                                    child: Icon(
+                                      Icons.restaurant,
+                                      size: 64,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                );
+                              },
                             ),
                           ),
                         ),
@@ -147,7 +162,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                 ],
                               ),
                               child: Text(
-                                ' 4${product['price'].toStringAsFixed(2)}',
+                                '\$${product['price'].toStringAsFixed(2)}',
                                 style: const TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -245,7 +260,17 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           width: double.infinity,
                           height: 52,
                           child: ElevatedButton.icon(
-                            onPressed: () {},
+                            onPressed: () {
+                              final cartService = Provider.of<CartService>(context, listen: false);
+                              cartService.addFoodItem(product, quantity: quantity);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('${product['name']} (${quantity}kg) added to cart!'),
+                                  backgroundColor: AppColors.primaryOrange,
+                                  duration: const Duration(seconds: 2),
+                                ),
+                              );
+                            },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: AppColors.primaryOrange,
                               shape: RoundedRectangleBorder(

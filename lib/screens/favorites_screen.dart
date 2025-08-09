@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wefind_app/utils/responsive_helper.dart';
+import '../utils/responsive_helper.dart';
 import '../services/favorites_service.dart';
 import '../models/dog_model.dart';
 import '../utils/app_colors.dart';
-import 'dog_detail_screen.dart';
+import '../screens/dog_detail_screen.dart';
 
 class FavoritesScreen extends StatefulWidget {
   const FavoritesScreen({Key? key}) : super(key: key);

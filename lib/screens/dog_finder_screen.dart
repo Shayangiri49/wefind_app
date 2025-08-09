@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wefind_app/utils/responsive_helper.dart';
+import 'package:flutter_card_swiper/flutter_card_swiper.dart';
+import '../utils/responsive_helper.dart';
 import '../widgets/header.dart';
 import '../widgets/profile_filter.dart';
 import '../widgets/dog_card_swiper.dart';
 import '../mock/pet_mock_data.dart';
 import '../services/favorites_service.dart';
-import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import '../models/dog_model.dart';
 
 class DogFinderScreen extends StatefulWidget {

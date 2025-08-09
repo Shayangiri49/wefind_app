@@ -17,6 +17,183 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String _email = 'sarah.johnson@email.com';
   String _phone = '(555) 123-4567';
   String _location = 'Richmond Rd, KA';
+  bool _isLoggingOut = false;
+
+  // Enhanced logout functionality
+  void _handleLogout(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false, // Prevent dismissing by tapping outside
+      builder: (BuildContext dialogContext) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return AlertDialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+              title: Row(
+                children: [
+                  Icon(
+                    Icons.logout,
+                    color: Colors.red[400],
+                    size: 24,
+                  ),
+                  const SizedBox(width: 8),
+                  const Text(
+                    'Logout',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Are you sure you want to logout?',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'You will need to sign in again to access your account.',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.grey[600],
+                    ),
+                  ),
+                  if (_isLoggingOut) ...[
+                    const SizedBox(height: 16),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              Colors.red[400]!,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        const Text(
+                          'Logging out...',
+                          style: TextStyle(fontSize: 14),
+                        ),
+                      ],
+                    ),
+                  ],
+                ],
+              ),
+              actions: _isLoggingOut
+                  ? []
+                  : [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(dialogContext).pop(); // Close dialog
+                        },
+                        child: Text(
+                          'Cancel',
+                          style: TextStyle(
+                            color: Colors.grey[600],
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: () async {
+                          setState(() {
+                            _isLoggingOut = true;
+                          });
+
+                          // Simulate logout process (you can add actual logout logic here)
+                          await _performLogout();
+
+                          // Close dialog
+                          if (Navigator.of(dialogContext).canPop()) {
+                            Navigator.of(dialogContext).pop();
+                          }
+
+                          // Navigate to onboarding screen and clear navigation stack
+                          Navigator.pushNamedAndRemoveUntil(
+                            context,
+                            '/onboarding',
+                            (route) => false,
+                          );
+
+                          // Show success message
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: const Row(
+                                children: [
+                                  Icon(
+                                    Icons.check_circle,
+                                    color: Colors.white,
+                                    size: 20,
+                                  ),
+                                  SizedBox(width: 8),
+                                  Text('Successfully logged out'),
+                                ],
+                              ),
+                              backgroundColor: Colors.green,
+                              duration: const Duration(seconds: 2),
+                              behavior: SnackBarBehavior.floating,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                            ),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.red[400],
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 20,
+                            vertical: 10,
+                          ),
+                        ),
+                        child: const Text(
+                          'Logout',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ],
+            );
+          },
+        );
+      },
+    );
+  }
+
+  // Simulate logout process - you can replace this with actual logout logic
+  Future<void> _performLogout() async {
+    // Add a small delay to show the loading state
+    await Future.delayed(const Duration(milliseconds: 1500));
+    
+    // Here you can add actual logout logic such as:
+    // - Clear user session/tokens from SharedPreferences
+    // - Clear cached user data
+    // - Reset app state
+    // - Call logout API endpoint
+    
+    // Example of clearing user data (uncomment if you have SharedPreferences):
+    // final prefs = await SharedPreferences.getInstance();
+    // await prefs.clear();
+    
+    // Reset the logging out state
+    setState(() {
+      _isLoggingOut = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -465,13 +642,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ResponsiveHelper.responsiveBorderRadius(context, mobile: 25, tablet: 28, desktop: 32),
             ),
           ),
-          child: Center(
-            child: Text(
-              'Logout',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: ResponsiveHelper.responsiveFontSize(context, mobile: 16, tablet: 18, desktop: 20),
-                fontWeight: FontWeight.bold,
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              borderRadius: BorderRadius.circular(
+                ResponsiveHelper.responsiveBorderRadius(context, mobile: 25, tablet: 28, desktop: 32),
+              ),
+              onTap: () => _handleLogout(context),
+              child: Center(
+                child: Text(
+                  'Logout',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: ResponsiveHelper.responsiveFontSize(context, mobile: 16, tablet: 18, desktop: 20),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ),
           ),
