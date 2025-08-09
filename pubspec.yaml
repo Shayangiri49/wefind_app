@@ -1,0 +1,37 @@
+name: wefind_app
+description: A dog finding app with exact product detail screen
+
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.19.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  provider: ^6.0.5
+  google_fonts: ^4.0.4
+  flutter_rating_bar: ^4.0.1
+  flutter_card_swiper: ^7.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  flutter_launcher_icons: ^0.13.1
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/paws.png"
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/dog_onboarding.png
+    - assets/icon/paws.png
+    - assets/images/dog1.png
+    - assets/images/dog2.png
+    - assets/images/dog3.png
+    - assets/images/dog4.png

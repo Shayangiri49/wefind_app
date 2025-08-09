@@ -1,0 +1,60 @@
+import '../models/dog_model.dart';
+
+final List<Dog> petMockData = [
+  Dog(
+    id: '1',
+    name: 'Dubby',
+    breed: 'Golden Retriever',
+    imageUrl: 'https://images.unsplash.com/photo-1552053831-71594a27632d?w=400&h=600&fit=crop',
+    age: 2,
+    tags: ['Playful', 'Friendly'],
+  ),
+  Dog(
+    id: '2',
+    name: 'Luna',
+    breed: 'Labrador',
+    imageUrl: 'https://images.unsplash.com/photo-1547407139-3c921a66005c?w=400&h=600&fit=crop',
+    age: 3,
+    tags: ['Loyal', 'Smart'],
+  ),
+  Dog(
+    id: '3',
+    name: 'Max',
+    breed: 'Beagle',
+    imageUrl: 'https://images.unsplash.com/photo-1537151625747-768eb6cf92b2?w=400&h=600&fit=crop',
+    age: 4,
+    tags: ['Active', 'Intelligent'],
+  ),
+  Dog(
+    id: '4',
+    name: 'Bella',
+    breed: 'Poodle',
+    imageUrl: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&h=600&fit=crop',
+    age: 1,
+    tags: ['Gentle', 'Loving'],
+  ),
+  Dog(
+    id: '5',
+    name: 'Bella',
+    breed: 'Poodle',
+    imageUrl: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&h=600&fit=crop',
+    age: 1,
+    tags: ['Gentle', 'Loving'],
+  ),
+  Dog(
+    id: '6',
+    name: 'Bella',
+    breed: 'Poodle',
+    imageUrl: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&h=600&fit=crop',
+    age: 1,
+    tags: ['Gentle', 'Loving'],
+  ),
+  Dog(
+    id: '7',
+    name: 'Bella',
+    breed: 'Poodle',
+    imageUrl: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&h=600&fit=crop',
+    age: 1,
+    tags: ['Gentle', 'Loving'],
+  ),
+];
